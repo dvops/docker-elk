@@ -8,6 +8,8 @@ services:
       - "9300:9300"
     environment:
       ES_JAVA_OPTS: "-Xms1g -Xmx1g"
+    volumes:
+      - ./es_data:/usr/share/elasticsearch/data
     networks:
       - docker_elk
   logstash:
@@ -16,7 +18,7 @@ services:
     volumes:
       - ./logstash/config:/etc/logstash/conf.d
     ports:
-      - "5000:5000"
+      - "9999:9999/udp"
     networks:
       - docker_elk
   kibana:
